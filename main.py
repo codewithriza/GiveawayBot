@@ -20,9 +20,6 @@ class GiveawayView(View):
     async def enter_giveaway(self, button: discord.ui.Button, interaction: discord.Interaction):
         await interaction.followup.send("You have entered the giveaway!", ephemeral=True)
 
-
-
-
 @bot.event
 async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(name=f'g!help for a list of commands! 🥳 🎉 Currently in {len(bot.guilds)} servers! 🎉'))
@@ -93,10 +90,9 @@ async def giveaway(ctx):
     except Exception as e:
         error_embed = discord.Embed(title='Error Encountered', description='It looks like there is an issue with the giveaway command.', color=discord.Color.red())
         error_embed.add_field(name='Error Message', value=str(e), inline=False)
-        error_embed.add_field(name='How to Fix', value='Please create an issue on [GitHub](https://github.com/codewithriza/js-exercism/issues) and we will support you soon.', inline=False)
+        error_embed.add_field(name='How to Fix', value='Please create an issue on [GitHub](https://github.com/codewithriza/GiveawayBot/issues) and we will support you soon.', inline=False)
         error_embed.set_footer(text='Please report this issue for further assistance.')
         await ctx.send(embed=error_embed)
-
 
 @bot.command()
 @commands.has_role(os.getenv('ADMIN_ROLE_ID'))
