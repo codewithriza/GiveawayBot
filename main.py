@@ -24,8 +24,9 @@ class GiveawayView(View):
 async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(name=f'g!help for a list of commands! 🥳 🎉 Currently in {len(bot.guilds)} servers! 🎉'))
     print('Ready to giveaway!')
+    await bot.tree.sync()
 
-@bot.command()
+@bot.hybrid_command()
 async def ghelp(ctx):
 
     ghelp = discord.Embed(color=0x7289da)
@@ -36,7 +37,7 @@ async def ghelp(ctx):
     ghelp.set_footer(text='Use the prefix "g!" before all commands!')
     await ctx.send(embed=ghelp)
 
-@bot.command()
+@bot.hybrid_command()
 @commands.has_permissions(administrator=True)
 async def giveaway(ctx):
     try:
@@ -94,7 +95,7 @@ async def giveaway(ctx):
         error_embed.set_footer(text='Please report this issue for further assistance.')
         await ctx.send(embed=error_embed)
 
-@bot.command()
+@bot.hybrid_command()
 @commands.has_role(os.getenv('ADMIN_ROLE_ID'))
 async def reroll(ctx, channel: discord.TextChannel, id_: int):
     try:
